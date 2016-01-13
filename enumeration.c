@@ -22,10 +22,12 @@ int randnum() {
 int main() {
   int sum, maxsum, i, j, k, n;
   int* a;
+  clock_t begin, end;
+  double time_spent;
 
   srand(time(NULL));
 
-  n = 10;
+  n = 100;
   sum = 0;
   maxsum = 0;
 
@@ -33,14 +35,15 @@ int main() {
 
   for(i=0; i<n; i++) {
     a[i] = randnum();
-    printf("%d ", a[i]);
+    //printf("%d ", a[i]);
   }
-  printf("\n");
+  //printf("\n");
 
+  begin = clock();
   for(i=0; i<(n-1); i++) {
     for(j=1; j<n; j++) {
       sum = 0;
-      for(k=i; k<j; k++) {
+      for(k=i; k<(j+1); k++) {
         sum += a[k];
       }
       if(sum > maxsum) {
@@ -48,8 +51,11 @@ int main() {
       }
     }
   }
+  end = clock();
+  time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
   printf("maxsum: %d\n", maxsum);
+  printf("time spent: %f\n", time_spent);
 
   return 0;
 }

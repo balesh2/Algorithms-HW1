@@ -20,20 +20,23 @@ int randnum() {
 }
 
 int main() {
-  int maxsub, maxsuf, i, j, n, *a, maxsum;
+  int maxsub, maxsuf, i, j, maxsum, n, *a;
 
   srand(time(NULL));
 
+
   maxsub = 0;
   maxsuf = 0;
-  n = 10;
-  a = malloc(sizeof(int)*n);
+  //n = 10;
+  //a = malloc(sizeof(int)*n);
 
+  /*
   for(i=1; i<n; i++) {
     a[i] = randnum();
     printf("%d ", a[i]);
   }
   printf("\n");
+  */
 
   for(i=0; i<n; i++) {
     if((maxsuf + a[i]) > 0) {

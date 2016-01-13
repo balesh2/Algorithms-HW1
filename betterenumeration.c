@@ -39,7 +39,7 @@ int main() {
   for(i = 1; i < n; i++)
   {
     sum = 0;
-    for(j = 0; j < i; j++)
+    for(j = 0; j < (i+1); j++)
     {
       sum += arr[j];
       if(sum > maxsum)
@@ -47,7 +47,7 @@ int main() {
         maxsum = sum;
       }
     }
-    for(j = 0; j < i; j++)
+    for(j = 0; j < (i+1); j++)
     {
       sum -= arr[j];
       if(sum > maxsum)
