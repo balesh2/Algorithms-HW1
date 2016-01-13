@@ -20,43 +20,54 @@ int randnum() {
 }
 
 int main() {
-  int  sum, maxsum, i, j, n;
+  int  sum, maxsum, i, j, m;
   int *arr;
+  clock_t begin, end;
+  double time_spent;
+  int n[18] = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000};
 
   srand(time(NULL));
 
   maxsum = 0;
-  n = 10;
-  arr = malloc(sizeof(int) * n);
 
-  for(i = 0; i < n; i++)
-  {
-    arr[i] = randnum();
-    printf("%d ", arr[i]);
-  }
-  printf("\n");
+  for(m=0; m<18; m++) {
+    arr = malloc(sizeof(int) * n[m]);
 
-  for(i = 1; i < n; i++)
-  {
-    sum = 0;
-    for(j = 0; j < (i+1); j++)
+    for(i = 0; i < n[m]; i++)
     {
-      sum += arr[j];
-      if(sum > maxsum)
+      arr[i] = randnum();
+      //printf("%d ", arr[i]);
+    }
+    //printf("\n");
+
+    begin = clock();
+    for(i = 1; i < n[m]; i++)
+    {
+      sum = 0;
+      for(j = 0; j < (i+1); j++)
       {
-        maxsum = sum;
+        sum += arr[j];
+        if(sum > maxsum)
+        {
+          maxsum = sum;
+        }
+      }
+      for(j = 0; j < (i+1); j++)
+      {
+        sum -= arr[j];
+        if(sum > maxsum)
+        {
+          maxsum = sum;
+        }
       }
     }
-    for(j = 0; j < (i+1); j++)
-    {
-      sum -= arr[j];
-      if(sum > maxsum)
-      {
-        maxsum = sum;
-      }
-    }
+
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+
+    printf("maxsum: %d\n", maxsum);
+    printf("time spent: %f\n", time_spent);
   }
-  printf("%d\n", maxsum);
 
   return 0;
 }

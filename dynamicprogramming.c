@@ -20,47 +20,55 @@ int randnum() {
 }
 
 int main() {
-  int maxsub, maxsuf, i, j, maxsum, n, *a;
+  int maxsub, maxsuf, i, j, maxsum, m, *a;
+  clock_t begin, end;
+  double time_spent;
+  int n[18] = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000};
 
   srand(time(NULL));
 
 
   maxsub = 0;
   maxsuf = 0;
-  //n = 10;
-  //a = malloc(sizeof(int)*n);
 
-  /*
-  for(i=1; i<n; i++) {
-    a[i] = randnum();
-    printf("%d ", a[i]);
-  }
-  printf("\n");
-  */
+  for(m=0; m<18; m++) {
+    a = malloc(sizeof(int)*n[m]);
 
-  for(i=0; i<n; i++) {
-    if((maxsuf + a[i]) > 0) {
-      maxsuf += a[i];
+    begin = clock();
+    for(i=1; i<n[m]; i++) {
+      a[i] = randnum();
+      //printf("%d ", a[i]);
+    }
+    //printf("\n");
+
+    for(i=0; i<n[m]; i++) {
+      if((maxsuf + a[i]) > 0) {
+        maxsuf += a[i];
+      }
+      else {
+        maxsuf = 0;
+      }
+      if(maxsub < maxsuf) {
+        maxsub = maxsuf;
+      }
+    }
+    end = clock();
+
+    //printf("maxsuf: %d\n", maxsuf);
+    //printf("maxsub: %d\n", maxsub);
+
+    if(maxsub > maxsuf) {
+      maxsum = maxsub;
     }
     else {
-      maxsuf = 0;
+      maxsum = maxsuf;
     }
-    if(maxsub < maxsuf) {
-      maxsub = maxsuf;
-    }
-  }
 
-  printf("maxsuf: %d\n", maxsuf);
-  printf("maxsub: %d\n", maxsub);
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-  if(maxsub > maxsuf) {
-    maxsum = maxsub;
+    printf("maxsum: %d\n", maxsum);
+    printf("time spent: %f\n", time_spent);
   }
-  else {
-    maxsum = maxsuf;
-  }
-
-  printf("%d\n", maxsum);
 
   return 0;
 }
