@@ -55,7 +55,6 @@ int main() {
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-    printf("maxsum: %d\n", maxsum);
     printf("time spent: %f\n", time_spent);
   }
 
